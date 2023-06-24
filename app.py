@@ -7,6 +7,23 @@ df = pd.read_csv('vehicles_us.csv')
 df['manufacturer'] = df['model'].apply(lambda x:
 x.split()[0])
 
+
+# Replace missing values in the model_year column with "unknown"
+df['model_year'].fillna('unknown', inplace=True)
+
+# Replace missing values in the model_year column with "unknown"
+df['cylinders'].fillna('unknown', inplace=True)
+
+# Replace missing values in the model_year column with "unknown"
+df['odometer'].fillna('unknown', inplace=True)
+
+# Replace missing values in the model_year column with "unknown"
+df['paint_color'].fillna('unknown', inplace=True)
+
+# Replace missing values in the model_year column with "unknown"
+df['is_4wd'].fillna('unknown', inplace=True)
+
+
 # Perform exploratory analysis
 
 st.header('Car Analysis App')
