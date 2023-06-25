@@ -8,20 +8,24 @@ df['manufacturer'] = df['model'].apply(lambda x:
 x.split()[0])
 
 
-# Replace missing values in the model_year column with "unknown"
-df['model_year'].fillna('unknown', inplace=True)
+# Replace missing values in the model_year column with median by car model
+df['model_year'] = df['model_year'].fillna(df.groupby(['model'])['model_year'].transform('median'))
 
-# Replace missing values in the model_year column with "unknown"
-df['cylinders'].fillna('unknown', inplace=True)
+# Replace missing values in the cylinders column with median by car model
+df['cylinders'] = df['cylinders'].fillna(df.groupby(['model'])['cylinders'].transform('median'))
 
-# Replace missing values in the model_year column with "unknown"
-df['odometer'].fillna('unknown', inplace=True)
+# Replace missing values in the odometer column with median by model_year
+df['odometer'] = df['odometer'].fillna(df.groupby(['model_year'])['odometer'].transform('median'))
 
-# Replace missing values in the model_year column with "unknown"
+# Replace missing values in the paint color column with "unknown"
 df['paint_color'].fillna('unknown', inplace=True)
 
-# Replace missing values in the model_year column with "unknown"
-df['is_4wd'].fillna('unknown', inplace=True)
+# Replace missing values in the is_4wd column with 0
+df['is_4wd'].fillna(0, inplace=True)
+
+
+# Drop rows with missing odometer values
+df.dropna(subset=['odometer'], inplace=True)
 
 
 # Perform exploratory analysis
