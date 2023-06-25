@@ -27,6 +27,12 @@ df['is_4wd'].fillna(0, inplace=True)
 # Drop rows with missing odometer values
 df.dropna(subset=['odometer'], inplace=True)
 
+# Convert 'model_year' column to datetime
+df['model_year'] = pd.to_datetime(df['model_year'], format='%Y')
+
+# Extract only the year from the datetime
+df['model_year'] = df['model_year'].dt.year
+
 
 # Perform exploratory analysis
 
